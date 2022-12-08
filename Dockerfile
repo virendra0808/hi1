@@ -1,7 +1,7 @@
-# Dockerfile that modifies oraclelinux:6 to include an Apache HTTP server
-FROM oraclelinux:6
-MAINTAINER A N Other <another@example.com>
-RUN yum -y install httpd
-RUN echo "HTTP server running on guest" > /var/www/html/index.html
+FROM ubuntu:14.04
+MAINTAINER virendra
+RUN apt-get update
+RUN apt-get install -y nginx
+ADD index.html /usr/share/nginx/html/index.html
+ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
 EXPOSE 80
-ENTRYPOINT /usr/sbin/httpd -D FOREGROUND
